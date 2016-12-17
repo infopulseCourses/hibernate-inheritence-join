@@ -1,13 +1,26 @@
 package entities;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 /**
- * Created by mtarasenko on 17.12.16.
+ * @author Stepan.Kachan
  */
 
 @Entity(name="role_permission")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RolePermission implements Serializable {
 
     @Id
@@ -18,21 +31,6 @@ public class RolePermission implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "permission_id")
-    private  Permission permission;
+    private Permission permission;
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
-    }
 }

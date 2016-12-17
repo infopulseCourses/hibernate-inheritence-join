@@ -1,13 +1,26 @@
 package entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Created by mtarasenko on 17.12.16.
+ * @author Stepan.Kachan
  */
 
+@Getter
+@Setter
 @Entity(name="role")
 public class Role {
 
@@ -21,38 +34,24 @@ public class Role {
     @OneToMany(orphanRemoval = true, mappedBy = "role", cascade = CascadeType.ALL)
     private List<User> users;
 
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RolePermission> rolePermissions;
+
+    public void addPermission(List<Permission> permission){
+        if(rolePermissions == null || rolePermissions.isEmpty()){
+            rolePermissions = new LinkedHashSet<>();
+        }
+        permission.forEach(permission1 -> rolePermissions.add(new RolePermission(this,permission1)));
+    }
+
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<Permission> rolePermissions;
 
     //RolePermission class is unneeded if you use ManyToMany linking.
     //Othewise create two OneToMany connections
 
-    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RolePermission> rolePermissions;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 //
 //    public List<Permission> getRolePermissions() {
 //        return rolePermissions;
@@ -61,26 +60,6 @@ public class Role {
 //    public void setRolePermissions(List<Permission> rolePermissions) {
 //        this.rolePermissions = rolePermissions;
 //    }
-    public List<RolePermission> getRolePermissions() {
-        return rolePermissions;
-    }
 
-    public void setRolePermissions(List<RolePermission> rolePermissions) {
-        this.rolePermissions = rolePermissions;
-    }
 
-    public void addPermission(List<Permission> permission){
-        if(rolePermissions == null || rolePermissions.isEmpty()){
-             rolePermissions = new ArrayList<>(permission.size());
-        }
-
-        for(Permission perm: permission){
-            RolePermission rolePermission1 = new RolePermission();
-            rolePermission1.setRole(this);
-            rolePermission1.setPermission(perm);
-
-            rolePermissions.add(rolePermission1);
-        }
-
-    }
 }

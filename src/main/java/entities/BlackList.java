@@ -1,10 +1,20 @@
 package entities;
 
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
- * Created by mtarasenko on 17.12.16.
+ * @author Stepan.Kachan
  */
 @Entity(name="black_list")
 public class BlackList {
@@ -26,43 +36,4 @@ public class BlackList {
     @JoinColumn(name="admin_id")
     private User admin;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Date getTimeAdded() {
-        return timeAdded;
-    }
-
-    public void setTimeAdded(Date timeAdded) {
-        this.timeAdded = timeAdded;
-    }
-
-    public User getBannedUser() {
-        return bannedUser;
-    }
-
-    public void setBannedUser(User bannedUser) {
-        this.bannedUser = bannedUser;
-    }
-
-    public User getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(User admin) {
-        this.admin = admin;
-    }
 }

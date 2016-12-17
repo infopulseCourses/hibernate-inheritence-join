@@ -1,12 +1,26 @@
 package entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
- * Created by mtarasenko on 17.12.16.
+ * @author Stepan.Kachan
  */
 
+@Getter
+@Setter
 @Entity(name = "messages")
 public class Message {
 
@@ -31,43 +45,4 @@ public class Message {
         timeSent = new Date();
     }
 
-    public Date getTimeSent() {
-        return timeSent;
-    }
-
-    public void setTimeSent(Date timeSent) {
-        this.timeSent = timeSent;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public User getSender() {
-        return sender;
-    }
-
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
 }

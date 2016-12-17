@@ -1,14 +1,30 @@
 package entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
- * Created by mtarasenko on 17.12.16.
+ * @author Stepan.Kachan
  */
 
 @Entity
 @Table(name="chat_user")
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -28,58 +44,4 @@ public class User {
     @JoinColumn(name="role_id")
     private Role role;
 
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-
-    public User() {
-        createDate = new Date();
-    }
-
-    public Long getId() {
-        return id;
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 }
